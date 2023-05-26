@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // INSPIRATION: https://itnext.io/implementing-arithmetic-within-typescripts-type-system-a1ef140a6f6f
 
 /**
  * Required Typescript 4.8+
  */
+
+// https://github.com/microsoft/TypeScript/pull/48094
+// requires TypeScript 4.8+
+export type ParseInt<T> = T extends `${infer N extends number}` ? N : never;
 
 type Length<T extends any[]> = T extends { length: infer L } ? L : never;
 
@@ -47,6 +52,10 @@ type Increment<A extends number | string> = ParseInt<
   ToNumber<AddString<`0${A}`, '1', SplitDigits<`${A}`>, ['1', '0', '0', '0', '0', '0', '0']>>
 >;
 
+export type Add<A extends string | number, B extends string | number> = ParseInt<
+  Normalize<ToNumber<AddString<`${A}`, `${B}`>>>
+>;
+
 type III = Increment<1999>;
 const II: Add<1999, 1> = 10;
 
@@ -80,10 +89,6 @@ export type Multiply<
 
 type YY = ParseInt<Normalize<ToNumber<AddString<'10', '1', SplitDigits<'19'>, ['1']>>>>;
 
-export type Add<A extends string | number, B extends string | number> = ParseInt<
-  Normalize<ToNumber<AddString<`${A}`, `${B}`>>>
->;
-
 const tn1: Add<9, 1> = 10;
 const tn2: Add<99, 1> = 100;
 const tn3: Add<999, 1> = 1000;
@@ -107,7 +112,3 @@ type SumDigits<A extends Digits = '0', B extends Digits = '0'> = DigitSums[A ext
   : A][B extends undefined ? '0' : B];
 
 type ss = SumDigits<'9', '9'>;
-
-// https://github.com/microsoft/TypeScript/pull/48094
-// requires TypeScript 4.8+
-export type ParseInt<T> = T extends `${infer N extends number}` ? N : never;
