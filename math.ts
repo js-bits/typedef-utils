@@ -93,8 +93,8 @@ const tn1: Add<9, 1> = 10;
 const tn2: Add<99, 1> = 100;
 const tn3: Add<999, 1> = 1000;
 const tn4: Add<999, 999> = 1998;
-const add: AddString<'99', '1'> = '';
-const tnu: ToNumber<AddString<'99', '1'>> = '';
+const add: AddString<'99', '1'>[0] = 10;
+const tnu: ToNumber<AddString<'99', '1'>> = '00000000000000000000000100';
 const add1: Add<9, 99999999999> = 100000000008;
 const add2: Add<99999999999, 9> = 100000000008;
 

@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, camelcase */
-import { Trim, Split, Unique } from './string.ts';
-import { MULTI_LINE_LIST, SINGLE_LINE_LIST, SINGLE_LINE_LONG_STRING } from './string.data.ts';
+/* eslint-disable @typescript-eslint/no-unused-vars, camelcase, import/extensions */
+import { Trim, Split, Unique } from './string';
+import { MULTI_LINE_LIST, SINGLE_LINE_LIST, SINGLE_LINE_LONG_STRING } from './string.data';
 
 let test_trimEmpty: Trim<'     '> = '';
 // @ts-expect-error Type '"abc"' is not assignable to type '""'
