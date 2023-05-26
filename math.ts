@@ -7,14 +7,13 @@ type BuildTuple<L extends number, T extends any[] = []> = T extends {
   ? T
   : BuildTuple<L, [...T, any]>;
 
-export type Increment<
-  Start extends number = 0,
-  Inc extends number = 1
-> = Length<[...BuildTuple<Inc>, ...BuildTuple<Start>]>;
+export type Increment<Start extends number = 0, Inc extends number = 1> = Length<
+  [...BuildTuple<Inc>, ...BuildTuple<Start>]
+>;
 
 type x = Increment<5>;
 
-type s = "123";
+type s = '123';
 // type n = <>Length<
 // [...BuildTuple<Inc>;
 

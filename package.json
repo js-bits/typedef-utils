@@ -1,0 +1,36 @@
+{
+  "name": "@js-bits/typedef-utils",
+  "version": "0.0.1",
+  "description": "Utility types for TypeScript",
+  "keywords": [
+    "typescript",
+    "type",
+    "declaration",
+    "string",
+    "number",
+    "math",
+    "literal"
+  ],
+  "type": "module",
+  "scripts": {
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/js-bits/enumerate"
+  },
+  "author": "https://github.com/apolo-gh",
+  "license": "ISC",
+  "devDependencies": {
+    "@js-bits/formalinter": "^1.0.2",
+    "husky": "^7.0.1"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "prettier": "@js-bits/formalinter/.prettierrc.json",
+  "eslintConfig": {
+    "extends": "@js-bits/eslint-config/.eslintrc.json"
+  }
+}
