@@ -1,5 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars, import/extensions */
 // INSPIRATION: https://itnext.io/implementing-arithmetic-within-typescripts-type-system-a1ef140a6f6f
+
+import { Longest } from './array';
 
 /**
  * Required Typescript 4.8+
@@ -8,10 +10,6 @@
 // https://github.com/microsoft/TypeScript/pull/48094
 // requires TypeScript 4.8+
 export type ParseInt<T> = T extends `${infer N extends number}` ? N : never;
-
-type Length<T extends unknown[]> = T extends { length: infer L } ? L : never;
-
-export type Longest<A extends unknown[], B extends unknown[]> = B[Length<A>] extends undefined ? A : B;
 
 type Digits = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 type Carryings = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];

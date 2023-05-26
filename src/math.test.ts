@@ -1,9 +1,5 @@
 /* eslint-disable import/extensions, @typescript-eslint/no-unused-vars, camelcase */
-import { Add, AddString, Longest, Multiply, Normalize, SplitDigits, SumDigits, ToNumber } from './math';
-
-const lest_Longest1: Longest<[1, 1, 1], [2, 2, 2]> = [1, 1, 1];
-const lest_Longest2: Longest<[1, 1], [2, 2, 2]> = [2, 2, 2];
-const lest_Longest3: Longest<[1, 1, 1, 1, 1], [2]> = [1, 1, 1, 1, 1];
+import { Add, AddString, Multiply, Normalize, SplitDigits, SumDigits, ToNumber } from './math';
 
 const test_SplitDigits1: SplitDigits<'1234'> = ['4', '3', '2', '1', '0'];
 
