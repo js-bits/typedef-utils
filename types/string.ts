@@ -2,7 +2,7 @@
 // INSPIRATION: https://lihautan.com/extract-parameters-type-from-string-literal-types-with-typescript/
 
 /**
- * Required Typescript 4.5+
+ * Required Typescript: 4.5+
  */
 
 type NotEmptyString<Str> = Str extends '' ? never : Str;

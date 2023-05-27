@@ -2,7 +2,7 @@
 // INSPIRATION: https://itnext.io/implementing-arithmetic-within-typescripts-type-system-a1ef140a6f6f
 
 /**
- * Required Typescript 4.8+
+ * Required Typescript: 4.8+
  */
 
 // https://github.com/microsoft/TypeScript/pull/48094

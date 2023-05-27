@@ -3,7 +3,7 @@ type Length<T extends unknown[]> = T extends {
 } ? L : never;
 type Longest<A extends unknown[], B extends unknown[]> = B[Length<A>] extends undefined ? A : B;
 /**
- * Required Typescript 4.8+
+ * Required Typescript: 4.8+
  */
 type ParseInt<T> = T extends `${infer N extends number}` ? N : never;
 type Digits = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
@@ -144,7 +144,7 @@ type Normalize<Str extends string> = Str extends `0${infer Num}` ? Normalize<Num
 type Add<A extends string | number, B extends string | number> = ParseInt<Normalize<ToNumber<AddString<A, B>>>>;
 type Multiply<A extends string | number, B extends string | number, Result extends number = 0, I extends number = 0, X extends number = Add<Result, B>, Inc extends number = Add<I, 1>> = I extends A ? Result : Multiply<A, B, X, Inc>;
 /**
- * Required Typescript 4.5+
+ * Required Typescript: 4.5+
  */
 type NotEmptyString<Str> = Str extends '' ? never : Str;
 type TrimLeft<Str, Spacer extends string = ' '> = Str extends `${Spacer}${infer Part}` ? TrimLeft<Part, Spacer> : Str;
