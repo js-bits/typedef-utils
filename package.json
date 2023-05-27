@@ -9,14 +9,18 @@
     "string",
     "number",
     "math",
-    "literal"
+    "literal",
+    "utilities",
+    "manipulation",
+    "type system"
   ],
   "type": "module",
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "tsc --noEmit && eslint '**/*.{js,jsx,ts,tsx}'",
     "test": "yarn lint",
-    "build": "tsc types/*.ts --emitDeclarationOnly --declaration --outFile dist/index.d.ts",
+    "build": "rimraf ./dist && tsc types/*.ts --emitDeclarationOnly --declaration --outFile dist/index.d.ts",
+    "docs": "rimraf ./docs && typedoc types/*.ts  --plugin typedoc-plugin-markdown --disableSources --readme none --hideMembersSymbol --hideBreadcrumbs",
     "prepare": "husky install"
   },
   "repository": {
@@ -27,7 +31,10 @@
   "license": "ISC",
   "devDependencies": {
     "@js-bits/formalinter": "^1.0.2",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "rimraf": "^5.0.1",
+    "typedoc": "^0.24.7",
+    "typedoc-plugin-markdown": "^3.15.3"
   },
   "engines": {
     "node": ">=12"
