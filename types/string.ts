@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // INSPIRATION: https://lihautan.com/extract-parameters-type-from-string-literal-types-with-typescript/
 
 /**
