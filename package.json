@@ -1,6 +1,6 @@
 {
   "name": "@js-bits/typedef-utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utility types for TypeScript",
   "keywords": [
     "typescript",
