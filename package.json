@@ -12,6 +12,7 @@
     "literal"
   ],
   "type": "module",
+  "types": "./index.d.ts",
   "scripts": {
     "lint": "tsc && eslint '**/*.{js,jsx,ts,tsx}'",
     "test": "yarn lint",
