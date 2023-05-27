@@ -3,3 +3,6 @@
 
 yarn build
 git add dist/**.*
+
+yarn docs
+git add docs/**.*

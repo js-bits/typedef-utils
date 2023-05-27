@@ -1,11 +1,36 @@
-declare namespace ArrayUtils {
+/**
+ * Tuples manipulations
+ */
+declare namespace TupleUtils {
     /**
-     * sdsfsdf
+     * Returns length of the given tuple
+     * @typeParam A - any tuple
+     * @example
+     * const length: TupleUtils.Length<[1, 2, 3, 4, 5]> = 5;
      */
-    type Length<T extends unknown[]> = T extends {
+    type Length<A extends unknown[]> = A extends {
         length: infer L;
     } ? L : never;
+    /**
+     * Compares two tuples by their length and returns either the longest one of them
+     * or the first one if they are the same length
+     * @remarks
+     * All items of both tuples must be defined in order for the operation to work properly
+     * @typeParam A - any tuple without undefined items
+     * @typeParam B - any tuple without undefined items
+     * @example
+     * const longest: TupleUtils.Longest<[1], [1, 2, 3]> = [1, 2, 3];
+     */
     type Longest<A extends unknown[], B extends unknown[]> = B[Length<A>] extends undefined ? A : B;
+    /**
+     * Appends new item to the given tuple.
+     * Optionally you can ignore empty strings by specifying the third argument as `true`
+     * @typeParam A - any tuple
+     * @typeParam Item - any value
+     * @typeParam [NoEmpty] - optional flag
+     * @example
+     * const arr: TupleUtils.Append<[1, 2, 3, 4], 5> = [1, 2, 3, 4, 5];
+     */
     type Append<A extends unknown[], Item, NoEmpty extends boolean = false> = NoEmpty extends true ? Item extends '' ? A : [...A, Item] : [...A, Item];
 }
 /**
@@ -14,13 +39,14 @@ declare namespace ArrayUtils {
  */
 declare namespace MathUtils {
     /**
-     * Returns number by a given string representation
+     * Returns number by the given string representation
+     * @typeParam T - any number
      * @requires TypeScript 4.8+
      * @remarks
      * {@link https://github.com/microsoft/TypeScript/pull/48094 | Related TypeScript issue}
      * @example
      * const intValue: MathUtils.Parse<'123'> = 123;
-     * const floatValue: MathUtils.Parse<'56.78'> = 56.78;
+     * const floatValue: MathUtils.Parse<'-56.78'> = -56.78;
      * const stringArg: MathUtils.Parse<123> = 123;
      */
     type Parse<T extends string | number> = T extends number ? T : T extends `${infer N extends number}` ? N : never;
@@ -164,7 +190,7 @@ declare namespace MathUtils {
     /** @internal */
     NumB extends Digits[] = SplitDigits<B>, 
     /** @internal */
-    L extends Digits[] = ArrayUtils.Longest<NumA, NumB>> = {
+    L extends Digits[] = TupleUtils.Longest<NumA, NumB>> = {
         [Index in keyof L]: SumDigits<NumA[Parse<Index>], NumB[Parse<Index>]>;
     };
     /** @ignore */
@@ -205,13 +231,55 @@ declare namespace MathUtils {
     type Multiply<A extends string | number, B extends string | number> = _Multiply_<A, B>;
 }
 /**
- * Required Typescript: 4.5+
+ * @requires Typescript: 4.5+
  */
 declare namespace StringUtils {
+    /** @ignore */
     type NotEmptyString<Str> = Str extends '' ? never : Str;
-    type TrimLeft<Str, Spacer extends string = ' '> = Str extends `${Spacer}${infer Part}` ? TrimLeft<Part, Spacer> : Str;
-    type TrimRight<Str, Spacer extends string = ' '> = Str extends `${infer Part}${Spacer}` ? TrimRight<Part, Spacer> : Str;
-    type Trim<Str> = TrimLeft<TrimRight<Str>>;
-    type Split<Str extends string, Spacer extends string = '\n', NoEmpty extends boolean = false, A extends string[] = []> = Str extends `${infer PartA}${Spacer}${infer PartB}` ? Split<Trim<PartB>, Spacer, NoEmpty, ArrayUtils.Append<A, Trim<PartA>, NoEmpty>> : ArrayUtils.Append<A, Trim<Str>, NoEmpty>;
-    type Unique<T extends string[]> = NotEmptyString<T[number]>;
+    /**
+     * Removes leading white spaces (or the specified characters) from the given string
+     * @typeParam Str - any string
+     * @typeParam Spacer - any string
+     * @example
+     * const str1: StringUtils.TrimLeft<'         abc'> = 'abc';
+     * const str2: StringUtils.TrimLeft<'*******abc', '*'> = 'abc';
+     */
+    type TrimLeft<Str extends string, Spacer extends string = ' '> = Str extends `${Spacer}${infer Part}` ? TrimLeft<Part, Spacer> : Str;
+    /**
+     * Removes trailing white spaces (or the specified characters) from the given string
+     * @typeParam Str - any string
+     * @typeParam Spacer - optional string character
+     * @example
+     * const str1: StringUtils.TrimRight<'abc         '> = 'abc';
+     * const str2: StringUtils.TrimRight<'abc*******', '*'> = 'abc';
+     */
+    type TrimRight<Str extends string, Spacer extends string = ' '> = Str extends `${infer Part}${Spacer}` ? TrimRight<Part, Spacer> : Str;
+    /**
+     * Removes leading and trailing white spaces (or the specified characters) from the given string
+     * @typeParam Str - any string
+     * @typeParam [Spacer] - optional string character
+     * @example
+     * const str1: StringUtils.Trim<'         abc         '> = 'abc';
+     * const str2: StringUtils.Trim<'*******abc*******', '*'> = 'abc';
+     */
+    type Trim<Str extends string, Spacer extends string = ' '> = TrimLeft<TrimRight<Str, Spacer>, Spacer>;
+    /** @ignore */
+    type _Split_<Str extends string, Spacer extends string = '\n', NoEmpty extends boolean = false, A extends string[] = []> = Str extends `${infer PartA}${Spacer}${infer PartB}` ? _Split_<Trim<PartB>, Spacer, NoEmpty, TupleUtils.Append<A, Trim<PartA>, NoEmpty>> : TupleUtils.Append<A, Trim<Str>, NoEmpty>;
+    /**
+     * Returns a tuple of substrings by splitting the string pattern by the given separator.
+     * Additionally you can filter out empty string from the resulting list by specifying the third argument as `true`
+     * @typeParam Str - any string
+     * @typeParam Separator - any string character
+     * @typeParam [NoEmpty] - optional flag
+     * @example
+     * const arr: StringUtils.Split<'a b c', ' '> = ['a', 'b', 'c'];
+     */
+    type Split<Str extends string, Separator extends string, NoEmpty extends boolean = false> = _Split_<Str, Separator, NoEmpty>;
+    /**
+     * Transforms a tuple of strings into a union of string values
+     * @typeParam A - any string tuple
+     * @example
+     * type StringUnion = StringUtils.Unique<['a', 'a', 'b', 'c', 'c']>; // "a" | "b" | "c"
+     */
+    type Unique<A extends string[]> = NotEmptyString<A[number]>;
 }

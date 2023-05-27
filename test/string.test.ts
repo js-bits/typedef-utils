@@ -18,22 +18,26 @@ let test_trimRightMutliple: StringUtils.Trim<'option_r2         '> = 'option_r2'
 test_trimRightMutliple = 'option_r3';
 
 const test_trimCenterSingle: StringUtils.Trim<' option_c1 '> = 'option_c1';
-const test_trimCenterMultiplr: StringUtils.Trim<'        option_c2         '> = 'option_c2';
+const test_trimCenterMultiple: StringUtils.Trim<'        option_c2         '> = 'option_c2';
+const test_trimCenterDashes: StringUtils.Trim<'-------option_c3---------', '-'> = 'option_c3';
 
 let test_trimSingleLineLimits: StringUtils.Trim<SINGLE_LINE_LONG_STRING> = 'string';
 // @ts-expect-error Type '"abc"' is not assignable to type '"string"'
 test_trimSingleLineLimits = 'abc';
 
-const test_splitNoneSpace: StringUtils.Split<'a b c'> = ['a b c'];
+const test_splitNoneSpace: StringUtils.Split<'a b c', '\n'> = ['a b c'];
 const test_splitNoneNewLine: StringUtils.Split<'a\nb\nc', ' '> = ['a\nb\nc'];
 
-const test_splitNewLine1: StringUtils.Split<'a\nb\nc'> = ['a', 'b', 'c'];
-const test_splitNewLine2: StringUtils.Split<'a\nb\nc\n'> = ['a', 'b', 'c', ''];
-const test_splitNewLine3: StringUtils.Split<`
+const test_splitNewLine1: StringUtils.Split<'a\nb\nc', '\n'> = ['a', 'b', 'c'];
+const test_splitNewLine2: StringUtils.Split<'a\nb\nc\n', '\n'> = ['a', 'b', 'c', ''];
+const test_splitNewLine3: StringUtils.Split<
+  `
   a
   b
   c
-`> = ['', 'a', 'b', 'c', ''];
+`,
+  '\n'
+> = ['', 'a', 'b', 'c', ''];
 
 const test_splitSpace1: StringUtils.Split<'a b c', ' '> = ['a', 'b', 'c'];
 const test_splitSpace2: StringUtils.Split<'   a b c  ', ' '> = ['', 'a', 'b', 'c'];
@@ -47,16 +51,16 @@ const test_SplitSingleLineLimits22: StringUtils.Split<SINGLE_LINE_LIST, ' '>[10]
 const test_SplitSingleLineLimits3: StringUtils.Split<SINGLE_LINE_LIST, ' '>[99] = 'OPTION100';
 const test_SplitSingleLineLimits4: StringUtils.Split<SINGLE_LINE_LIST, ' '>[998] = 'OPTION999';
 
-const test_SplitMultiLineLimits1: StringUtils.Split<MULTI_LINE_LIST>[0] = '';
-const test_SplitMultiLineLimits21: StringUtils.Split<MULTI_LINE_LIST>[10] = 'OPTION010';
+const test_SplitMultiLineLimits1: StringUtils.Split<MULTI_LINE_LIST, '\n'>[0] = '';
+const test_SplitMultiLineLimits21: StringUtils.Split<MULTI_LINE_LIST, '\n'>[10] = 'OPTION010';
 // @ts-expect-error Type '"OPTION011"' is not assignable to type '"OPTION010"'
-const test_SplitMultiLineLimits22: StringUtils.Split<MULTI_LINE_LIST>[10] = 'OPTION011';
-const test_SplitMultiLineLimits3: StringUtils.Split<MULTI_LINE_LIST>[100] = 'OPTION100';
-const test_SplitMultiLineLimits4: StringUtils.Split<MULTI_LINE_LIST>[997] = 'OPTION997';
-const test_SplitMultiLineLimits5: StringUtils.Split<MULTI_LINE_LIST>[998] = '';
+const test_SplitMultiLineLimits22: StringUtils.Split<MULTI_LINE_LIST, '\n'>[10] = 'OPTION011';
+const test_SplitMultiLineLimits3: StringUtils.Split<MULTI_LINE_LIST, '\n'>[100] = 'OPTION100';
+const test_SplitMultiLineLimits4: StringUtils.Split<MULTI_LINE_LIST, '\n'>[997] = 'OPTION997';
+const test_SplitMultiLineLimits5: StringUtils.Split<MULTI_LINE_LIST, '\n'>[998] = '';
 
-const test_SplitUnionLimits1: StringUtils.Unique<StringUtils.Split<MULTI_LINE_LIST>> = 'OPTION010';
-const test_SplitUnionLimits2: StringUtils.Unique<StringUtils.Split<MULTI_LINE_LIST>> = 'OPTION997';
+const test_SplitUnionLimits1: StringUtils.Unique<StringUtils.Split<MULTI_LINE_LIST, '\n'>> = 'OPTION010';
+const test_SplitUnionLimits2: StringUtils.Unique<StringUtils.Split<MULTI_LINE_LIST, '\n'>> = 'OPTION997';
 // @ts-expect-error Type '"OPTION999"' is not assignable to type 'Unique<["", "OPTION001", "OPTION002", ...
 const test_SplitUnionLimits3: StringUtils.Unique<StringUtils.Split<MULTI_LINE_LIST>> = 'OPTION999';
 // @ts-expect-error Type '""' is not assignable to type 'Unique<["", "OPTION001", "OPTION002", ...

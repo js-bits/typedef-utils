@@ -1,6 +1,9 @@
 /* eslint-disable import/extensions, @typescript-eslint/no-unused-vars, camelcase */
 
-const p: MathUtils.ParseInt<'123'> = 123;
+const test_ParseInt: MathUtils.Parse<'123'> = 123;
+const test_ParseInt2: MathUtils.Parse<123> = 123;
+const test_ParseFloat: MathUtils.Parse<'56.78'> = 56.78;
+const test_ParseNegative: MathUtils.Parse<'-56.78'> = -56.78;
 
 const test_SplitDigits1: MathUtils.SplitDigits<'1234'> = ['4', '3', '2', '1', '0'];
 
@@ -25,8 +28,10 @@ const test_Add5: MathUtils.Add<999, 999> = 1998;
 const test_Add6: MathUtils.Add<9, 99999999999> = 100000000008;
 const test_Add7: MathUtils.Add<99999999999, 9> = 100000000008;
 const test_Add8: MathUtils.Add<9999999, 9999999> = 19999998;
+const test_Add9: MathUtils.Add<'1234567890', '987654321'> = 2222222211;
 
 // A is limited to 999, B is "limitless"
 const test_Multiply1: MathUtils.Multiply<999, 99999999> = 99899999001;
 const test_Multiply2: MathUtils.Multiply<199, 3> = 597;
 const test_Multiply3: MathUtils.Multiply<78, 63> = 4914;
+const test_Multiply4: MathUtils.Multiply<'999', '999'> = 998001;
