@@ -58,11 +58,8 @@ declare namespace MathUtils {
   type AddString<
     A extends string | number,
     B extends string | number,
-    /** @ignore */
     NumA extends Digits[] = SplitDigits<A>,
-    /** @internal */
     NumB extends Digits[] = SplitDigits<B>,
-    /** @internal */
     L extends Digits[] = TupleUtils.Longest<NumA, NumB>
   > = {
     [Index in keyof L]: SumDigits<NumA[Parse<Index>], NumB[Parse<Index>]>;

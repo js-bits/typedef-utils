@@ -149,13 +149,7 @@ declare namespace MathUtils {
     /** @ignore */
     type SumDigits<A extends Digits = '0', B extends Digits = '0'> = DigitSums[A extends undefined ? '0' : A][B extends undefined ? '0' : B];
     /** @ignore */
-    type AddString<A extends string | number, B extends string | number, 
-    /** @ignore */
-    NumA extends Digits[] = SplitDigits<A>, 
-    /** @internal */
-    NumB extends Digits[] = SplitDigits<B>, 
-    /** @internal */
-    L extends Digits[] = TupleUtils.Longest<NumA, NumB>> = {
+    type AddString<A extends string | number, B extends string | number, NumA extends Digits[] = SplitDigits<A>, NumB extends Digits[] = SplitDigits<B>, L extends Digits[] = TupleUtils.Longest<NumA, NumB>> = {
         [Index in keyof L]: SumDigits<NumA[Parse<Index>], NumB[Parse<Index>]>;
     };
     /** @ignore */
