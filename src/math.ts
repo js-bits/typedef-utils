@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, import/extensions */
 // INSPIRATION: https://itnext.io/implementing-arithmetic-within-typescripts-type-system-a1ef140a6f6f
 
-import { Longest } from './array';
-
 /**
  * Required Typescript 4.8+
  */
 
 // https://github.com/microsoft/TypeScript/pull/48094
 // requires TypeScript 4.8+
-export type ParseInt<T> = T extends `${infer N extends number}` ? N : never;
+type ParseInt<T> = T extends `${infer N extends number}` ? N : never;
 
 type Digits = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 type Carryings = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
@@ -27,16 +25,16 @@ type DigitSums = [
   [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 ];
 
-export type SplitDigits<
+type SplitDigits<
   Num extends string | number,
   A extends Digits[] = []
 > = `${Num}` extends `${infer D extends Digits}${infer X}` ? SplitDigits<X, [D, ...A]> : [...A, '0'];
 
-export type SumDigits<A extends Digits = '0', B extends Digits = '0'> = DigitSums[A extends undefined
+type SumDigits<A extends Digits = '0', B extends Digits = '0'> = DigitSums[A extends undefined
   ? '0'
   : A][B extends undefined ? '0' : B];
 
-export type AddString<
+type AddString<
   A extends string | number,
   B extends string | number,
   NumA extends Digits[] = SplitDigits<A>,
@@ -46,19 +44,19 @@ export type AddString<
   [Index in keyof L]: SumDigits<NumA[ParseInt<Index>], NumB[ParseInt<Index>]>;
 };
 
-export type ToNumber<A extends number[], Result extends string = '', Carrying extends number = 0> = A extends [
+type ToNumber<A extends number[], Result extends string = '', Carrying extends number = 0> = A extends [
   infer D extends number,
   ...infer Rest extends number[]
 ]
   ? ToNumber<Rest, `${Units[DigitSums[Units[D]][Carrying]]}${Result}`, D extends 9 ? Carrying : Carryings[D]>
   : Result;
 
-export type Normalize<Str extends string> = Str extends `0${infer Num}` ? Normalize<Num> : Str;
+type Normalize<Str extends string> = Str extends `0${infer Num}` ? Normalize<Num> : Str;
 
 // @ts-expect-error Types of property 'toString' are incompatible.
-export type Add<A extends string | number, B extends string | number> = ParseInt<Normalize<ToNumber<AddString<A, B>>>>;
+type Add<A extends string | number, B extends string | number> = ParseInt<Normalize<ToNumber<AddString<A, B>>>>;
 
-export type Multiply<
+type Multiply<
   A extends string | number,
   B extends string | number,
   Result extends number = 0,

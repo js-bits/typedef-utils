@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, camelcase, import/extensions */
-import { Trim, Split, Unique } from './string';
 import { MULTI_LINE_LIST, SINGLE_LINE_LIST, SINGLE_LINE_LONG_STRING } from './string.data';
 
 let test_trimEmpty: Trim<'     '> = '';

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, import/extensions, camelcase */
-import { Length, Longest } from './array';
 
 const test_Length1: Length<[1, 2, 3, 4, 5]> = 5;
 const test_Length2: Length<[]> = 0;

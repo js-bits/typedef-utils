@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions, @typescript-eslint/no-unused-vars, camelcase */
-import { Add, AddString, Multiply, Normalize, SplitDigits, SumDigits, ToNumber } from './math';
+
+const p: ParseInt<'123'> = 123;
 
 const test_SplitDigits1: SplitDigits<'1234'> = ['4', '3', '2', '1', '0'];
 
