@@ -4,6 +4,6 @@
 
 ### Modules
 
-- [array](modules/array.md)
 - [math](modules/math.md)
 - [string](modules/string.md)
+- [tuple](modules/tuple.md)

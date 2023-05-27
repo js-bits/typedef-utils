@@ -1,6 +1,6 @@
 # Namespace: TupleUtils
 
-[array](array.md).TupleUtils
+[tuple](tuple.md).TupleUtils
 
 Tuples manipulations
 
@@ -8,9 +8,9 @@ Tuples manipulations
 
 ### Type Aliases
 
-- [Append](array.TupleUtils.md#append)
-- [Length](array.TupleUtils.md#length)
-- [Longest](array.TupleUtils.md#longest)
+- [Append](tuple.TupleUtils.md#append)
+- [Length](tuple.TupleUtils.md#length)
+- [Longest](tuple.TupleUtils.md#longest)
 
 ## Type Aliases
 
@@ -59,7 +59,7 @@ ___
 
 ### Longest
 
- **Longest**<`A`, `B`\>: `B`[[`Length`](array.TupleUtils.md#length)<`A`\>] extends `undefined` ? `A` : `B`
+ **Longest**<`A`, `B`\>: `B`[[`Length`](tuple.TupleUtils.md#length)<`A`\>] extends `undefined` ? `A` : `B`
 
 Compares two tuples by their length and returns either the longest one of them
 or the first one if they are the same length
