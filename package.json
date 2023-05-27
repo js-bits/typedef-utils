@@ -12,10 +12,11 @@
     "literal"
   ],
   "type": "module",
-  "types": "./index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "lint": "tsc && eslint '**/*.{js,jsx,ts,tsx}'",
+    "lint": "tsc --noEmit && eslint '**/*.{js,jsx,ts,tsx}'",
     "test": "yarn lint",
+    "build": "tsc types/*.ts --emitDeclarationOnly --declaration --outFile dist/index.d.ts",
     "prepare": "husky install"
   },
   "repository": {
