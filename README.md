@@ -4,6 +4,6 @@ Useful generic types for operating with string literals, numbers and tuples in T
 
 Follow the reference docs for more information:
 
-- [Tuples utilities](./docs/modules/tuple.TupleUtils.md)
-- [Math utilities](./docs/modules/math.MathUtils.md)
-- [String utilities](./docs/modules/string.StringUtils.md)
+- [Tuples utilities](docs/modules/tuple.TupleUtils.md)
+- [Math utilities](docs/modules/math.MathUtils.md)
+- [String utilities](docs/modules/string.StringUtils.md)
