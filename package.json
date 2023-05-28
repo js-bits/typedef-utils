@@ -10,6 +10,8 @@
     "number",
     "math",
     "literal",
+    "tuple",
+    "array",
     "utilities",
     "manipulation",
     "type system"
