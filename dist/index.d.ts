@@ -153,7 +153,7 @@ declare namespace MathUtils {
         [Index in keyof L]: SumDigits<NumA[Parse<Index>], NumB[Parse<Index>]>;
     };
     /** @ignore */
-    type ToNumber<A extends number[], Result extends string = '', Carrying extends number = 0> = A extends [
+    type ToNumber<A, Result extends string = '', Carrying extends number = 0> = A extends [
         infer D extends number,
         ...infer Rest extends number[]
     ] ? ToNumber<Rest, `${Units[DigitSums[Units[D]][Carrying]]}${Result}`, D extends 9 ? Carrying : Carryings[D]> : Result;
@@ -162,7 +162,7 @@ declare namespace MathUtils {
     /** @ignore */
     type _Add_<A extends string | number, B extends string | number> = Parse<Normalize<ToNumber<AddString<A, B>>>>;
     /** @ignore */
-    type _Multiply_<A extends string | number, B extends string | number, Result extends number = 0, I extends number = 0, X extends number = _Add_<Result, B>, Inc extends number = _Add_<I, 1>> = I extends Parse<A> ? Result : _Multiply_<Parse<A>, B, X, Inc>;
+    type _Multiply_<A extends string | number, B extends string | number, Result extends number = 0, I extends number = 0> = I extends Parse<A> ? Result : _Multiply_<Parse<A>, B, _Add_<Result, B>, _Add_<I, 1>>;
     /**
      * Addition of two positive integer values represented by either a number or a string format
      * @typeParam A - any positive integer number
