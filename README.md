@@ -13,6 +13,24 @@ const longest: TupleUtils.Longest<[1], [1, 2, 3]> = [1, 2, 3];
 const append: TupleUtils.Append<[1, 2, 3, 4], 5> = [1, 2, 3, 4, 5];
 ```
 
+## Installation
+
+Install with npm:
+
+```
+npm install @js-bits/typedef-utils -D
+```
+
+Install with yarn:
+
+```
+yarn add @js-bits/typedef-utils -D
+```
+
+Add `"./node_modules/@js-bits"` to `"typeRoots"` of your _tsconfig.json_, add `"typedef-utils"` to `"types"` array.
+
+## Documentation
+
 Follow the reference docs for more information:
 
 - [String utilities](docs/modules/string.StringUtils.md)
