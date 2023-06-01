@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/no-namespace, @typescript-eslint/no-unused-vars */
-
 /**
  * Tuples manipulations
  */
-
 /**
  * Returns length of the given tuple
  * @typeParam A - any tuple
  * @example
  * const length: TupleUtils.Length<[1, 2, 3, 4, 5]> = 5;
  */
-export type Length<A extends unknown[]> = A extends { length: infer L } ? L : never;
-
+export type Length<A extends unknown[]> = A extends {
+    length: infer L;
+} ? L : never;
 /**
  * Compares two tuples by their length and returns either the longest one of them
  * or the first one if they are the same length
@@ -23,7 +21,6 @@ export type Length<A extends unknown[]> = A extends { length: infer L } ? L : ne
  * const longest: TupleUtils.Longest<[1], [1, 2, 3]> = [1, 2, 3];
  */
 export type Longest<A extends unknown[], B extends unknown[]> = B[Length<A>] extends undefined ? A : B;
-
 /**
  * Appends new item to the given tuple.
  * Optionally you can ignore empty strings by specifying the third argument as `true`
@@ -33,8 +30,4 @@ export type Longest<A extends unknown[], B extends unknown[]> = B[Length<A>] ext
  * @example
  * const arr: TupleUtils.Append<[1, 2, 3, 4], 5> = [1, 2, 3, 4, 5];
  */
-export type Append<A extends unknown[], Item, NoEmpty extends boolean = false> = NoEmpty extends true
-  ? Item extends ''
-    ? A
-    : [...A, Item]
-  : [...A, Item];
+export type Append<A extends unknown[], Item, NoEmpty extends boolean = false> = NoEmpty extends true ? Item extends '' ? A : [...A, Item] : [...A, Item];

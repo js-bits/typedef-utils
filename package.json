@@ -17,11 +17,22 @@
     "type system"
   ],
   "type": "module",
-  "types": "dist/index.d.ts",
+  "exports": {
+    "./math": "./types/math.ts",
+    "./string": "./types/string.ts",
+    "./tuple": "./types/tuple.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*"
+      ]
+    }
+  },
   "scripts": {
     "lint": "tsc --noEmit && eslint '**/*.{js,jsx,ts,tsx}'",
     "test": "yarn lint",
-    "build": "rimraf ./dist && tsc types/*.ts --emitDeclarationOnly --declaration --outFile dist/index.d.ts",
+    "build": "rimraf ./dist && tsc types/*.ts --emitDeclarationOnly --declaration --outDir dist",
     "docs": "rimraf ./docs && typedoc types/*.ts  --plugin typedoc-plugin-markdown --disableSources --readme none --hideMembersSymbol --hideBreadcrumbs",
     "prepare": "husky install"
   },
