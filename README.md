@@ -54,3 +54,7 @@ Follow the reference docs for more information:
 - [String utilities](docs/modules/string.md)
 - [Math utilities](docs/modules/math.md)
 - [Tuple utilities](docs/modules/tuple.md)
+
+## Notes
+
+- Requires TypeScript 4.8+
