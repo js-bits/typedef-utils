@@ -2,7 +2,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn build
-git add dist/**.*
 
 yarn docs
 git add docs
